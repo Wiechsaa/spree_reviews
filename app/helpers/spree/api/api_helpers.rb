@@ -2,7 +2,7 @@
 
 module Spree
   module Api
-    module ApiHelpersDecorator
+    module ApiHelpers
       def self.prepended(base)
         base.module_eval do
           @@review_attributes = [

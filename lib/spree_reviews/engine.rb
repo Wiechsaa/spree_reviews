@@ -10,6 +10,7 @@ module SpreeReviews
     end
 
     initializer 'spree_reviews.environment', before: :load_config_initializers do |_app|
+      require 'spree/review_setting'
       Spree::Reviews::Config = Spree::ReviewSetting.new
     end
 
