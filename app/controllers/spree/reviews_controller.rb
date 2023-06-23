@@ -1,5 +1,5 @@
 module Spree
-  class ReviewsController < Spree::StoreController
+  class ReviewsController < Spree::BaseController
     helper Spree::BaseHelper
     before_action :load_product, only: [:index, :new, :create]
     before_action :init_pagination, only: [:index]
@@ -26,7 +26,7 @@ module Spree
       authorize! :create, @review
       if @review.save
         flash[:notice] = Spree.t(:review_successfully_submitted)
-        redirect_to spree.product_path(@product)
+        redirect_to spree.product_reviews_path(@product)
       else
         render :new
       end
