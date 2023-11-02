@@ -1,13 +1,11 @@
 <% content_for :page_title do %>
   <%= Spree.t(:reviews) %>
 <% end %>
-
 <% if Spree.version.to_f < 4.2 %>
   <% svg_icon = '' %>
 <% else %>
   <% svg_icon = '.svg' %>
 <% end %>
-
 <% content_for :table_filter do %>
   <div data-hook="admin_reviews_index_search">
     <%= search_form_for [:admin, @search] do |f| %>
@@ -18,7 +16,6 @@
             <%= f.text_field :name_cont, size: 25, class: 'form-control' %>
           </div>
         </div>
-
         <div class="col-md-6">
           <div class="form-group">
             <%= label_tag :q_title_cont, Spree::Review.human_attribute_name(:title) %>
@@ -26,7 +23,6 @@
           </div>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
@@ -34,7 +30,6 @@
             <%= f.text_field :review_cont, size: 25, class: 'form-control' %>
           </div>
         </div>
-
         <div class="col-md-6">
           <div class="form-group">
             <%= label_tag :q_approved_eq, Spree.t(:approval_status) %>
@@ -48,9 +43,7 @@
     <% end %>
   </div>
 <% end %>
-
 <%= render 'spree/admin/shared/index_table_options', collection: @reviews %>
-
 <% if @reviews.any? %>
   <table class="table" id="listing_reviews">
     <thead>
@@ -70,7 +63,7 @@
           <td><%= link_to_if review.product, review.product.name, product_path(review.product) %></td>
           <td><%= txt_stars(review.rating) %></td>
           <td><%= link_to "(#{review.feedback_stars}/#{review.feedback_reviews.size})", admin_review_feedback_reviews_path(review) %></td>
-          <td><%= review.user_id ? link_to(review.user.try(:email), admin_user_path(review.user)) : Spree.t(:anonymous) %></td>
+          <td><%= review.user ? link_to(review.user.try(:email), admin_user_path(review.user)) : Spree.t(:anonymous) %></td>
           <td><%= link_to_if review.ip_address, review.ip_address, "http://whois.domaintools.com/#{review.ip_address}", target: :blank %></td>
           <td><%= l review.created_at, format: :short %></td>
           <td data-hook="admin_reviews_index_row_actions" class="actions">
@@ -89,5 +82,4 @@
     <%= Spree.t(:no_resource_found, resource: Spree.t(:reviews)) %>
   </div>
 <% end %>
-
 <%= render 'spree/admin/shared/index_table_options', collection: @reviews %>
