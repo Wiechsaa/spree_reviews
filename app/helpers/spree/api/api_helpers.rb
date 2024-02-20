@@ -30,8 +30,6 @@ module Spree
           end
         end
       end
-
-      ::Spree::Api::ApiHelpers.prepend self if ::Spree::Api::ApiHelpers.included_modules.exclude?(self)
     end
   end
 end
